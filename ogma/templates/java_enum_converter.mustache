@@ -1,0 +1,31 @@
+{{> generated_header}}
+package {{package}};
+
+import org.jooq.impl.EnumConverter;
+import {{enum_fqn}};
+
+import javax.annotation.Generated;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+
+{{> generated_annotation}}
+@SuppressWarnings("serial")
+public class {{converter_class_name}} extends EnumConverter<Integer,{{name}}>
+{
+    public {{converter_class_name}}()
+    {
+        super(Integer.class, {{name}}.class);
+    }
+
+    /**
+     * Be explicit about the fact that this class is not serializable.
+     *
+     * As a safety complement to suppressing the warning for lack of
+     * serialVersionUID.
+     */
+    private void writeObject(ObjectOutputStream oos) throws IOException
+    {
+        throw new IOException("This class is NOT serializable.");
+    }
+}
+

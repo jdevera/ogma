@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<configuration xmlns="http://www.jooq.org/xsd/jooq-codegen-3.8.0.xsd">
+  <!-- Configure the database connection here -->
+  <jdbc>
+    <driver>org.mariadb.jdbc.Driver</driver>
+    <url>jdbc:mariadb://{{dbhost}}:{{dbport}}/{{dbname}}</url>
+    <user>{{dbuser}}</user>
+    <password>{{dbpassword}}</password>
+  </jdbc>
+
+  <generator>
+    <!-- The default code generator. You can override this one, to generate your own code style.
+         Supported generators:
+         - org.jooq.util.JavaGenerator
+         - org.jooq.util.ScalaGenerator
+         Defaults to org.jooq.util.JavaGenerator -->
+    <name>org.jooq.util.JavaGenerator</name>
+
+    <database>
+      <!-- The database type. The format here is:
+           org.util.[database].[database]Database -->
+      <name>org.jooq.util.mariadb.MariaDBDatabase</name>
+
+      <!-- The database schema (or in the absence of schema support, in your RDBMS this
+           can be the owner, user, database name) to be generated -->
+      <inputSchema>{{dbname}}</inputSchema>
+
+      <outputSchema>{{schema_name}}</outputSchema>
+
+      <!-- All elements that are generated from your schema
+           (A Java regular expression. Use the pipe to separate several expressions)
+           Watch out for case-sensitivity. Depending on your database, this might be important! -->
+      <includes>.*</includes>
+
+      <!-- All elements that are excluded from your schema
+           (A Java regular expression. Use the pipe to separate several expressions).
+           Excludes match before includes -->
+      <excludes></excludes>
+
+      <!-- CUSTOM and FORCED TYPES --> 
+      <customTypes>
+      {{#enums}}
+        <customType>
+          <name>{{enum_fqn}}</name>
+          <converter>{{converter_fqn}}</converter>
+        </customType>
+      {{/enums}}
+      </customTypes>
+      <forcedTypes>
+      {{#fields}}
+        <forcedType>
+            <name>{{name}}</name>
+            <expression>.*{{expression}}</expression>
+        </forcedType>
+      {{/fields}}
+      </forcedTypes>
+
+    </database>
+
+    <generate>
+        <pojos>true</pojos>
+        <pojosEqualsAndHashCode>true</pojosEqualsAndHashCode>
+        <daos>true</daos>
+        <!-- <jpaAnnotations>true</jpaAnnotations> -->
+        <!-- <validationAnnotations>true</validationAnnotations> -->
+        <fluentSetters>true</fluentSetters>
+    </generate>
+
+    <target>
+      <!-- The destination package of your generated classes (within the destination directory) -->
+      <packageName>{{package}}</packageName>
+
+      <!-- The destination directory of your generated classes -->
+      <directory>{{codedir}}</directory>
+    </target>
+
+    <!--
+    The strategy configuration can be used to change names of generated objects 
+    http://www.jooq.org/doc/3.7/manual/code-generation/codegen-matcherstrategy/
+    -->
+    <strategy>
+      <matchers>
+        <tables>
+          <table>
+            <pojoClass>
+              <!-- Add the 'Pojo' suffix to all POJOs -->
+              <expression>$0_pojo</expression>
+              <transform>PASCAL</transform>
+            </pojoClass>
+          </table>
+        </tables>
+      </matchers>
+    </strategy>
+  </generator>
+</configuration>

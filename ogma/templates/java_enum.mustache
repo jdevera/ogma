@@ -1,0 +1,11 @@
+{{> generated_header}}
+package {{package}};
+
+import javax.annotation.Generated;
+
+{{> generated_annotation}}
+public enum {{name}}
+{
+    {{#values}}{{valname}}{{! ({{valnum) }}{{^last}},{{/last}}
+    {{/values}};
+}
