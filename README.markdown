@@ -4,6 +4,8 @@
 
 # Ogma
 
+<img align="right" style="float: right;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Ogma-Lawrie-Highsmith.jpeg/100px-Ogma-Lawrie-Highsmith.jpeg">
+
 > According to legend, he is the inventor of Ogham, the runic language in which Irish Gaelic was first written. 
 
 **Ogma** is a database access code generator for Java. It will take your database schema definition written in a Python-based DSL and generate (with jOOQ, among others) the necessary Java code to perform typed queries on that database.
