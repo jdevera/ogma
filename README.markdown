@@ -1,3 +1,7 @@
+![PyPI](https://img.shields.io/pypi/v/ogma.svg)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/ogma.svg)
+![PyPI - License](https://img.shields.io/pypi/l/ogma.svg)
+
 # Ogma
 
 > According to legend, he is the inventor of Ogham, the runic language in which Irish Gaelic was first written. 
